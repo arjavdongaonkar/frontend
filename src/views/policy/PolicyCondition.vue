@@ -26,6 +26,7 @@
           v-if="
             subject !== 'COORDINATES' &&
             subject !== 'VERSION_DISTANCE' &&
+            subject !== 'PATCHED_VERSION' &&
             isSubjectSelectable
           "
           id="input-value"
@@ -39,6 +40,7 @@
           v-else-if="
             subject !== 'COORDINATES' &&
             subject !== 'VERSION_DISTANCE' &&
+            subject !== 'PATCHED_VERSION' &&
             !isSubjectSelectable
           "
           id="input-value"
@@ -249,6 +251,11 @@ export default {
         { value: 'CONTAINS_ANY', text: this.$t('operator.contains_any') },
         { value: 'CONTAINS_ALL', text: this.$t('operator.contains_all') },
       ],
+      presenceOperators: [
+        { value: 'IS_PRESENT', text: this.$t('operator.is_present') },
+        { value: 'IS_NOT_PRESENT', text: this.$t('operator.is_not_present') },
+      ],
+
       operators: [],
       possibleValues: [],
     };
@@ -361,6 +368,9 @@ export default {
           break;
         case 'EPSS':
           this.operators = this.numericOperators;
+          break;
+        case 'PATCHED_VERSION':
+          this.operators = this.presenceOperators;
           break;
         default:
           this.operators = [];
