@@ -26,7 +26,6 @@
           v-if="
             subject !== 'COORDINATES' &&
             subject !== 'VERSION_DISTANCE' &&
-            subject !== 'PATCHED_VERSION' &&
             isSubjectSelectable
           "
           id="input-value"
@@ -40,7 +39,6 @@
           v-else-if="
             subject !== 'COORDINATES' &&
             subject !== 'VERSION_DISTANCE' &&
-            subject !== 'PATCHED_VERSION' &&
             !isSubjectSelectable
           "
           id="input-value"
@@ -216,6 +214,7 @@ export default {
           value: 'VERSION_DISTANCE',
           text: this.$t('message.version_distance'),
         },
+         { value: 'PATCH_VERSION', text: this.$t('message.patch_version') },
       ],
       objectOperators: [
         { value: 'IS', text: this.$t('operator.is') },
@@ -251,11 +250,6 @@ export default {
         { value: 'CONTAINS_ANY', text: this.$t('operator.contains_any') },
         { value: 'CONTAINS_ALL', text: this.$t('operator.contains_all') },
       ],
-      presenceOperators: [
-        { value: 'IS_PRESENT', text: this.$t('operator.is_present') },
-        { value: 'IS_NOT_PRESENT', text: this.$t('operator.is_not_present') },
-      ],
-
       operators: [],
       possibleValues: [],
     };
@@ -295,6 +289,8 @@ export default {
           return false;
         case 'EPSS':
           return false;
+        case 'PATCH_VERSION':
+          return true;
         default:
           return false;
       }
@@ -369,8 +365,12 @@ export default {
         case 'EPSS':
           this.operators = this.numericOperators;
           break;
-        case 'PATCHED_VERSION':
-          this.operators = this.presenceOperators;
+        case 'PATCH_VERSION':
+          this.operators = this.objectOperators;
+          this.possibleValues = [
+            { value: true, text: this.$t('message.present') },
+            { value: false, text: this.$t('message.not_present') },
+          ];
           break;
         default:
           this.operators = [];
