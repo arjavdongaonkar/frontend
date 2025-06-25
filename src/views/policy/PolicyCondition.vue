@@ -370,6 +370,7 @@ export default {
           break;
         case 'ATTRIBUTED_ON':
           this.operators = this.numericOperators;
+          break;
         case 'PATCH_VERSION':
           this.operators = this.objectOperators;
           this.possibleValues = [
