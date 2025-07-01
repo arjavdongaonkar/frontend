@@ -127,6 +127,24 @@ export default {
           },
         },
         {
+          title: this.$t('message.vulnerability'),
+          field: 'vulnerability.vulnId',
+          sortable: true,
+          formatter: (value, row, index) => {
+            if (row.vulnerability) {
+              let url = xssFilters.uriInUnQuotedAttr(
+                '../../../vulnerabilities/' +
+                  row.vulnerability.source +
+                  '/' +
+                  row.vulnerability.vulnId,
+              );
+              return `<a href="${url}">${xssFilters.inHTMLData(row.vulnerability.vulnId)}</a>`;
+            } else {
+              return '';
+            }
+          },
+        },
+        {
           title: this.$t('message.occurred_on'),
           field: 'timestamp',
           sortable: true,

@@ -736,6 +736,7 @@
     "password_not_acceptable": "Check that new password and confirm password match. You can't re-use your old password",
     "password_unauthorized": "Check current login credentials and try again",
     "patch_version": "Patch Version",
+    "patched_versions": "Patched Versions",
     "phone": "Phone",
     "policies": "Policies",
     "policies_tagged_with": "Policies tagged with {tag}",

@@ -224,6 +224,14 @@ export default {
           },
         },
         {
+          title: this.$t('message.patched_versions'),
+          field: 'vulnerability.patchedVersions',
+          sortable: true,
+          formatter(value) {
+            return xssFilters.inHTMLData(common.valueWithDefault(value, ''));
+          },
+        },
+        {
           title: this.$t('message.group'),
           field: 'component.group',
           sortable: true,
