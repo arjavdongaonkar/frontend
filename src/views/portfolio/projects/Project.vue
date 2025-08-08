@@ -310,6 +310,7 @@
         <project-findings
           :key="this.uuid"
           :uuid="this.uuid"
+          :tags="this.project.tags"
           v-on:total="totalFindingsIncludingAliases = $event"
         />
       </b-tab>
