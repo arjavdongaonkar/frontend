@@ -54,6 +54,7 @@
       }}</b-tooltip>
 
       <b-button
+         v-if="!this.tags.some(tag => tag.name === 'sast')"
         id="reanalyze-button"
         size="md"
         variant="outline-primary"
@@ -63,7 +64,7 @@
         <span class="fa fa-refresh"></span>
         {{ $t('message.project_reanalyze') }}
       </b-button>
-      <b-tooltip target="reanalyze-button" triggers="hover focus">{{
+      <b-tooltip v-if="!this.tags.some(tag => tag.name === 'sast')" target="reanalyze-button" triggers="hover focus">{{
         $t('message.project_reanalyze_tooltip')
       }}</b-tooltip>
 
@@ -120,6 +121,7 @@ import ProjectUploadVexModal from './ProjectUploadVexModal';
 export default {
   props: {
     uuid: String,
+    tags: Array,
   },
   mixins: [bootstrapTableMixin, permissionsMixin],
   components: {
@@ -219,6 +221,14 @@ export default {
             } else {
               return xssFilters.inHTMLData(common.valueWithDefault(value, ''));
             }
+          },
+        },
+        {
+          title: this.$t('message.patched_versions'),
+          field: 'vulnerability.patchedVersions',
+          sortable: true,
+          formatter(value) {
+            return xssFilters.inHTMLData(common.valueWithDefault(value, ''));
           },
         },
         {
