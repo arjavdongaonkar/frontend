@@ -173,6 +173,9 @@ $common.formatAnalyzerLabel = function formatAnalyzerLabel(
       // NB: Trivy can report vulnerabilities from sources that DT does
       // not explicitly support.
       break;
+    case 'AWS_CODEGURU_ANALYZER':
+      analyzerLabel = 'AWS CodeGuru';
+      analyzerUrl = referenceUrl;
   }
   if (analyzerUrl) {
     analyzerLabel = `<a href="${analyzerUrl}" target="_blank">${analyzerLabel} <i class="fa fa-external-link"></i></a>`;
